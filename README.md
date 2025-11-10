@@ -18,7 +18,7 @@ usa consulta com RAG para verificar os itens disponiveis e a quantidade conforme
 1. Usuário envia mensagem de texto, audio, PDF ou imagem no WhatsApp
 2. Uazapi recebe a mensagem e envia para o webhook
 3. Flask valida e processa a requisição (no caso de multiplas mensagens, aciona o buffer)
-4. Bot simula digitação e processa com IA (acessa o RAG caso necessário)
+4. Agente simula digitação e processa com IA (acessa o RAG caso necessário)
 5. Retorna a mensagem do Agente para o cliente via Uazapi (somente texto)
 
 ### Tecnologias Utilizadas
