@@ -1,0 +1,36 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: wpp_bot_api
+    restart: always
+    ports:
+      - '5000:5000'
+    depends_on:
+      - qdrant
+    environment:
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+
+  qdrant:
+    image: qdrant/qdrant
+    container_name: wpp_bot_qdrant
+    restart: always
+    ports:
+      - '6333:6333'
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  # ngrok:
+  #   image: wernight/ngrok
+  #   container_name: wpp_bot_ngrok
+  #   restart: always
+  #   depends_on:
+  #     - api
+  #   environment:
+  #     - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+  #     - NGROK_PORT=api:5000
+
+volumes:
+  qdrant_data:
