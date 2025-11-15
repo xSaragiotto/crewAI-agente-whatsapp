@@ -9,9 +9,8 @@ services:
       - '5000:5000'
     depends_on:
       - qdrant
-    environment:
-      - QDRANT_HOST=qdrant
-      - QDRANT_PORT=6333
+    env_file:
+      - .env
 
   qdrant:
     image: qdrant/qdrant
