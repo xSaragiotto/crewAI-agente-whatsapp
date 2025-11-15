@@ -2,6 +2,7 @@ from crewai import Agent, Task, Crew, LLM
 from crewai.memory.external.external_memory import ExternalMemory
 from qdrant_client import QdrantClient
 # from agent.agent_memory import QdrantChatStorage
+from agent.supabase_rag_tool import SupabaseRAGTool
 from dotenv import load_dotenv
 import os
 
@@ -54,11 +55,12 @@ class BotVania:  # Agent AI
             Você responde de forma amigável e simpática, sempre em no máximo 200 caracteres.
             Você tem expertise em AVCB/CLCB e ajuda clientes com clareza.""",
             llm=self.__llm,
+            tools=[SupabaseRAGTool()],
             verbose=True # Logs
         )
         
         resposta_padrao = Task(
-            description='Responda a pergunta do usuário: {question}',
+            description='Responda a pergunta do usuário: {question}. Use a ferramenta de busca quando precisar consultar informações sobre AVCB e CLCB no banco de dados.',
             expected_output='Resposta clara, amigável e com máximo 200 caracteres',
             agent=self.agent
         )
